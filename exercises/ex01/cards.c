@@ -1,9 +1,26 @@
 /*
- * Program to evaluate face values.
- */
+ * Program to prompt user for input of card value,
+ * evaluate card value, and count cards.
+*/
 
  #include <stdio.h>
  #include <stdlib.h>
+
+
+ int keepCount (int card_value) {
+   /*
+    * takes in the value of the card and returns the change to be made
+    * to the count depending on that number
+   */
+   if ((card_value > 2) && (card_value < 7)) {
+     return 1;
+   } else if (card_value == 10) {
+     return -1;
+   } else {
+     return 0;
+   }
+ }
+
 
 int main() {
   char card_name[3];
@@ -13,8 +30,10 @@ int main() {
 
 while ( card_name[0] != 'X' ) {
   // I could not get the "do" loop running, even while copyint the exact code from the book
+
   puts("Enter the card_name: ");
   scanf("%2s", card_name);
+
   int val = 0;
   switch(card_name[0]) {
     case 'K':
@@ -35,11 +54,7 @@ while ( card_name[0] != 'X' ) {
       }
   }
 
-  if ((val > 2) && (val < 7)) {
-    count++;
-  } else if (val == 10) {
-    count--;
-  }
+  count += keepCount(val);
 
   printf("Current count: %i\n", count);
 
