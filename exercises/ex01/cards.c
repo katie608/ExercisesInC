@@ -21,16 +21,17 @@
    }
  }
 
- int getValue () {
-   
-   char card_name[3];
-   int count = 0;
+ int getValue (char card_name[3], int count, int val) {
+   /*
+    * gets card value from user, creates the corresponding value,
+    * keeps track of cards
+   */
 
  do {
    puts("Enter the card_name: ");
    scanf("%2s", card_name);
 
-   int val = 0;
+
    switch(card_name[0]) {
      case 'K':
      case 'Q':
@@ -59,5 +60,16 @@
 
 
 int main() {
-  getValue();
+  /*
+   * main loop
+   * declares variables card_name, count, and val
+   * calls functions for card counting program
+  */
+
+  char card_name[3];
+  int count = 0;
+  int val = 0;
+  getValue(card_name, count, val);
+
+  return 0;
  }
