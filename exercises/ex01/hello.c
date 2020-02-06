@@ -1,10 +1,22 @@
 #include <stdio.h>
 
+int timestwo(int n){
+  return n*2;
+}
+
 int main() {
   int x = 50;
   int y = x + 1;
      printf("%i\n", y);
     return 0;
+
+  timestwo(y);
+
+  int a = 3;
+  int b = 4;
+  int c = a + b;
+  printf("c is %d\n", c);
+
 }
 
 
