@@ -6,9 +6,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-int sumArray(int array[]) {
-  // make this work
-  return array[0];
+int sumArray(int array[], int length) {
+  int i;
+  int sum = 0;
+
+  for(i=0; i <= length; i++) {
+   sum += array[i];
+  }
+
+  return sum;
 }
 
 int main () {
@@ -16,20 +22,29 @@ int main () {
   char input[8];
   int val;
 
+  // keep track of how many times through loop to add to array
+  int i = 0;
+
+  // get user inputs
+  fgets(input, 8, stdin);
+
   do {
-    puts("Enter: ");
-    fgets(input, 8, stdin);
 
+    // convert input to an int, and display it
     val = atoi(input);
+    printf("Number: %i\n", val);
 
-    printf("Input: %i\n", input);
+    // add values to array
+    nums[i] = val;
+    i++;
 
-    // add number to array
+  // breaks out of loop when user enters control-D (null value)
+    puts("Enter: ");
+  } while(fgets(input, 8, stdin) != NULL);
 
-  } while(input != NULL); // make this work
-    return 0;
-
-  int sum = sumArray(nums);
+    // sum array
+    int sum = sumArray(nums, sizeof(nums));
+    printf("Sum: %i\n", sum);
 
     return 0;
 }
