@@ -17,10 +17,8 @@ int sumArray(int array[], int length) {
    sum += array[in];
    // printf("i: %i\n", i);
   }
-
   return sum;
 }
-
 
 
 int main () {
@@ -38,13 +36,27 @@ int main () {
 
   do {
 
+    if (sizeof(input) > 8) {
+      puts("Your input exceeds the maximum length");
+      continue;
+    }
+
     // convert input to an int, and display it
     val = atoi(input);
     printf("Number: %i\n", val);
 
-    // add values to array
-    nums[i] = val;
-    i++;
+    if (val == 0){
+      puts("It appears you have entered either 0 or a value that cannot be interpreted. Perhaps your value includes characters. Your input has been ignored. Please don't do that again. Or do, I'm a computer, you don't have to take orders from me....yet :)");
+    } else {
+      // add values to array
+      nums[i] = val;
+      i++;
+    }
+
+    if (i> 256) {
+      puts("You have reached the maximum number of elements you can enter. I will calculate your sum now.");
+      break;
+    }
 
   // breaks out of loop when user enters control-D (null value)
   // continue to get user inputs

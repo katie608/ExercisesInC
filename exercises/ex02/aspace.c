@@ -36,7 +36,7 @@ int main ()
 
 /*
 The Address Space
-  3. See PDF in this directory for sketch
+  3. See jpg in this directory for sketch
   4. Yes, another call to malloc makes the stack grow upwards
   5. Local has a smaller address
   6. I used a size of 2, and google says there is 0x20
