@@ -34,7 +34,8 @@ returns: string
 */
 char *reverse_string(char *s) {
     //TODO: Fill this in.
-    return "";
+    char sr = [];
+    return sr;
 }
 
 /* ctoi: Converts a character to integer.
