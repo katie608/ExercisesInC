@@ -91,7 +91,11 @@ void add_digits(char a, char b, char c, char *total, char *carry) {
     int bi = ctoi(b);
     int ci = ctoi(c);
     int t = ai+bi+ci;
-    printf("Total (int): %i: \n", t);
+    // printf("Total (int): %i: \n", t);
+    // 12/10 is one
+    // 12 mod 10 is 2
+    *total = itoc(t%10);
+    *carry = itoc(t/10);
 }
 
 /* Define a type to represent a BigInt.
@@ -221,6 +225,6 @@ int main (int argc, char *argv[])
 
     //TODO: When you have the first three functions working,
     //      uncomment the following, and it should work.
-    // test_add_bigint();
+    test_add_bigint();
     return 0;
 }
