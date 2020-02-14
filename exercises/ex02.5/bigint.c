@@ -37,12 +37,9 @@ char *reverse_string(char *s) {
     int i;
     for (i=len-1; i>=0; i--) {
       sr[count] = s[i];
-      // printf("sr: %s: \n", sr);
       count++;
     }
     sr[count] = '\0';
-    // printf("Original String: %s: \n", s);
-    // printf("Reversed String: %s: \n", sr);
     return sr;
 }
 
@@ -60,20 +57,7 @@ i: integer 0 to 9
 returns: character '0' to '9'
 */
 char itoc (int i) {
-    //TODO: Fill this in, with an appropriate assertion.
-    // char s[1];
-    // char s = malloc(sizeof(char));
-    // s = i + '0';
-    // s = "aaa";
-    // s = sprintf(s,"%d",i); // write formatted data to string
-    // switch(i) {
-    //   case
-    // }
-
-    // printf("Int: %i: \n", i);
-    // printf("Int to string: %c: \n", s);
     assert(isdigit('0'+i)); // causing segmentation fault?
-
     return '0'+i;
 }
 
@@ -91,9 +75,6 @@ void add_digits(char a, char b, char c, char *total, char *carry) {
     int bi = ctoi(b);
     int ci = ctoi(c);
     int t = ai+bi+ci;
-    // printf("Total (int): %i: \n", t);
-    // 12/10 is one
-    // 12 mod 10 is 2
     *total = itoc(t%10);
     *carry = itoc(t/10);
 }
@@ -223,8 +204,6 @@ int main (int argc, char *argv[])
     test_itoc();
     test_add_digits();
 
-    //TODO: When you have the first three functions working,
-    //      uncomment the following, and it should work.
     test_add_bigint();
     return 0;
 }
