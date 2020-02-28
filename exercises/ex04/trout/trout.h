@@ -26,7 +26,7 @@
 
 typedef struct timeval Timeval;
 typedef struct sockaddr Sockaddr;
-typedef struct sigfunc Sigfunc;
+// typedef struct sigfunc Sigfunc;
 
 
 // k: new from trout.c

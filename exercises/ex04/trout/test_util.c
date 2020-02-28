@@ -7,7 +7,7 @@
 #include <string.h>
 #include <assert.h>
 #include "util.h"
-#include "util.c"
+// #include "util.c"
 
 #include "test_util.h"
 
@@ -21,21 +21,21 @@ static char *test1() {
   in.tv_usec = 3;
   in.tv_sec = 4;
   tv_sub(&out, &in);
-  char *message = "test1 failed: endswith(\"endswith\", \"swith\") should return 1";
-  mu_assert(message, out.tv_usec == 1000001);
+  char *message = "test1 failed: tv_sub should return 999998";
+  mu_assert(message, out.tv_usec == 999998);
   return 0;
 }
 
 static char *test2() {
   struct timeval out;
   struct timeval in;
-  out.tv_usec = 1;
+  out.tv_usec = 8901;
   out.tv_sec = 12;
-  in.tv_usec = 3;
-  in.tv_sec = 4;
+  in.tv_usec = 433;
+  in.tv_sec = 490;
   tv_sub(&out, &in);
-  char *message = "test1 failed: endswith(\"endswith\", \"swith\") should return 1";
-  mu_assert(message, out.tv_usec == 10000002);
+  char *message = "test2 failed: tv_sub should return 8468";
+  mu_assert(message, out.tv_usec == 8468);
   return 0;
 }
 
