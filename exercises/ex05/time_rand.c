@@ -2,6 +2,19 @@
 
 Copyright 2016 Allen B. Downey
 License: MIT License https://opensource.org/licenses/MIT
+
+Compile along with rand.c
+gcc rand.c time_rand.c -o time_rand
+
+Output:
+174.704 ms 	 dummy
+537.577 ms 	 dummy2
+645.232 ms 	 random_float
+690.269 ms 	 my_random_float
+1577.918 ms 	 my_random_float2
+639.399 ms 	 random_float
+
+random_float is the fastest
 */
 
 #include <stdio.h>
@@ -53,7 +66,7 @@ double time_func(int iters, float(*func)())
 }
 
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     double time;
     int iters = 100000000;

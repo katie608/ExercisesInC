@@ -79,6 +79,11 @@ float my_random_float2()
 double my_random_double()
 {
     // TODO: fill this in
+    double d;
+    
+    my_random_float();
+
+    return ;
 }
 
 // return a constant (this is a dummy function for time trials)
