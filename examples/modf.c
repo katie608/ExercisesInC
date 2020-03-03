@@ -33,6 +33,15 @@ returns: new array, caller must free
 */
 // TODO: Write this function
 
+double *get_int_part (double *a, int n) {
+  double *res = malloc(n);
+  int i;
+  for (i=0; i<length; i++) {
+    array[i];
+  }
+  return res;
+}
+
 void test_get_int_part()
 {
     double array[] = {1.2, 2.718, 3.1412, 5.6};
@@ -57,6 +66,14 @@ p: location where the address of the frac_array should go
 returns: new array, caller must free
 */
 //TODO: Write this function
+
+double *both_parts (double *a, int n, double **p) {
+  double *res1 = malloc(n);
+  double *res2 = malloc(n);
+  
+  *p = res2;
+  return res;
+}
 
 
 void test_get_both_parts()

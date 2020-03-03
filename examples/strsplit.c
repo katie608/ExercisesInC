@@ -2,15 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+Splits string between characters
+*/
+
 void strsplit1(char *string, char sep, char *first, char *second) {
-    char *sep_ptr = strchr(string, sep);
+  /*
+  Solve problem using string library
+  */
+    // searches for first occurance of character, returns pointer to first
+    char *sep_ptr = strchr(string, sep); // instance of character in string
+    // set n to the index of the character
     int n = sep_ptr - string;
+    // copies up to n characters
     strncpy(first, string, n);
     first[n] = '\0';
     strcpy(second, sep_ptr+1);
 }
 
 void strsplit2(char *string, char sep, char *first, char *second) {
+  /*
+  Solve problem using for loops and indexing
+  */
     int i;
     for (i=0; ; i++) {
         if (string[i] == sep) {
@@ -30,6 +43,9 @@ void strsplit2(char *string, char sep, char *first, char *second) {
 }
 
 void strsplit3(char *string, char sep, char *first, char *second) {
+  /*
+  Older style of C, which is a little harder to read
+  */
     while (*string != sep) {
         *first++ = *string++;
     }
@@ -42,6 +58,8 @@ void strsplit3(char *string, char sep, char *first, char *second) {
 }
 
 void strsplit4(char *string, char sep, char *first, char *second) {
+  /*
+  */
     char *copy = strdup(string);
 
     char *token;
