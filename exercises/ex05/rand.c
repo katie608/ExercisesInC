@@ -79,11 +79,40 @@ float my_random_float2()
 double my_random_double()
 {
     // TODO: fill this in
-    double d;
-    
-    my_random_float();
+    long long int x;
+    long int y;
+    long int mant;
+    long int exp = 1022; //changed from 26 to 1022
+    int mask = 1; // mask does not change
 
-    return ;
+    union {
+        double f;
+        long int i;
+    } b;
+
+    // generate random bits until we see the first set bit
+    while (1) {
+        y = random();
+        y = y << 32;
+        x = y | random();
+        if (x == 0) {
+            exp -= 63; // changed 31 to 63
+        } else {
+            break;
+        }
+    }
+
+    // find the location of the first set bit and compute the exponent
+    while (x & mask) {
+        mask <<= 1;
+        exp--;
+    }
+
+    // use the remaining bit as the mantissa
+    mant = x >> 11; // changed from 8 to 11
+    b.i = (exp << 52) | mant; // changed 23 to 52
+
+    return b.f;
 }
 
 // return a constant (this is a dummy function for time trials)

@@ -23,7 +23,7 @@ int main (int argc, char *argv[])
     //     printf ("%lf\n", x);
     // }
 
-    for (i=0; i<100; i++) {
+    for (i=0; i<10000; i++) {
         x = my_random_double();
         printf ("%lf\n", x);
     }

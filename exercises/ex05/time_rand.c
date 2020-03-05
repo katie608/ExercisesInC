@@ -15,6 +15,19 @@ Output:
 639.399 ms 	 random_float
 
 random_float is the fastest
+
+Output:
+182.460000 ms 	 dummy
+630.052000 ms 	 dummy2
+671.764000 ms 	 random_float
+732.769000 ms 	 my_random_float
+1690.799000 ms 	 my_random_float2
+629.812000 ms 	 random_float
+636.978000 ms 	 random_double
+2033.603000 ms 	 my_random_double
+
+random_double is faster than my_random_double
+
 */
 
 #include <stdio.h>
@@ -65,6 +78,21 @@ double time_func(int iters, float(*func)())
     return t1 - t0;
 }
 
+double d_time_func(int iters, double(*func)())
+{
+    int i;
+    double f;
+    long double t0, t1;
+
+    srandom(time(NULL));
+
+    t0 = get_seconds();
+    for (i=0; i<iters; i++) {
+        f = func();
+    }
+    t1 = get_seconds();
+    return t1 - t0;
+}
 
 int main(int argc, char *argv[])
 {
@@ -89,4 +117,10 @@ int main(int argc, char *argv[])
 
     time = time_func(iters, random_float);
     printf("%f ms \t random_float\n", time);
+
+    time = time_func(iters, random_double);
+    printf("%f ms \t random_double\n", time);
+
+    time = d_time_func(iters, my_random_double);
+    printf("%f ms \t my_random_double\n", time);
 }
