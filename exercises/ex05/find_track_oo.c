@@ -21,7 +21,7 @@ char tracks[][80] = {
 
 
 typedef regex_t Regex;
-
+regex_t regex;
 
 /* Returns a new Regex that matches the given pattern.
 *
@@ -31,7 +31,12 @@ typedef regex_t Regex;
 */
 Regex *make_regex(char *pattern, int flags) {
     // FILL THIS IN!
-    return NULL;
+    int ret = regcomp(&regex, pattern, REG_EXTENDED | REG_NOSUB);
+    if (ret) {
+        fprintf(stderr, "Could not compile regex\n");
+        exit(1);
+    }
+    return &regex;
 }
 
 /* Checks whether a regex matches a string.
@@ -42,7 +47,12 @@ Regex *make_regex(char *pattern, int flags) {
 */
 int regex_match(Regex *regex, char *s) {
     // FILL THIS IN!
-    return 0;
+    int ret = regexec(regex, s, 0, NULL, 0);
+    if (!ret) {
+      return 1;
+    } else {
+      return 0;
+    }
 }
 
 /* Frees a Regex.
@@ -51,6 +61,7 @@ int regex_match(Regex *regex, char *s) {
 */
 void regex_free(Regex *regex) {
     // FILL THIS IN!
+    regfree(regex);
 }
 
 
