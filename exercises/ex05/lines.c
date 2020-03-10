@@ -31,7 +31,8 @@ MIT License
 #include "shapes.h"
 
 typedef struct {
-    Point *start, *end;
+    Point *start; 
+    Point *end;
 } Line;
 
 /* Return a new Line
