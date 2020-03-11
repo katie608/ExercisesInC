@@ -55,7 +55,16 @@ void print_list(Node **list) {
 */
 int pop(Node **list) {
     // FILL THIS IN!
-    return 0;
+    Node *head = *list;
+    if (head == NULL) {
+      return -1;
+    }
+    *list = head->next;
+    int *val = malloc(sizeof(head->val));
+    val = head->val;
+    free(head);
+    return val;
+    // return head->val;
 }
 
 
@@ -103,17 +112,29 @@ int remove_by_value(Node **list, int val) {
 */
 void reverse(Node **list) {
     // FILL THIS IN!
-    // new = head
-    // curr = head.next
-    // next = head.next.next
-    // while (next) {
-    //  curr.next = prev
-    // prev = current
-    // curr = next
-    // next = curr.next
-    //}
-    // curr.next = prev
-    // head = curr
+    Node *curr = *list;
+    Node *prev = NULL;
+    Node *next = curr->next;
+    while (next != NULL) {
+      next = curr->next;
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+    } // this one just prints out the head
+
+    Node *prev = *list;
+    Node *curr = prev->next;
+    Node *next = curr->next;
+    while (next != NULL) {
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+      next = curr->next;
+    }
+    curr->next = prev;
+    *list = curr;
+    // this one keeps printing out numbers
+
 
 }
 
@@ -126,19 +147,25 @@ int main() {
 
     Node **list = &head;
     print_list(list);
+    // should print [1 2 3 4]
 
     int retval = pop(list);
     print_list(list);
+    // should print [2 3 4]
 
     push(list, retval+10);
     print_list(list);
+    // should print [11 2 3 4]
 
     remove_by_value(list, 3);
     print_list(list);
+    // should print [11 2 4]
 
     remove_by_value(list, 7);
     print_list(list);
+    // should print [11 2 4]
 
     reverse(list);
     print_list(list);
+    // should print [4 2 11]
 }
