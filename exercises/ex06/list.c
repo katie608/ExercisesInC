@@ -60,11 +60,11 @@ int pop(Node **list) {
       return -1;
     }
     *list = head->next;
-    int *val = malloc(sizeof(head->val));
-    val = head->val;
-    free(head);
-    return val;
-    // return head->val;
+    // int *val = malloc(sizeof(head->val));
+    // val = head->val;
+    // free(head);
+    // return val;
+    return head->val;
 }
 
 
@@ -74,7 +74,6 @@ int pop(Node **list) {
 * val: value to add
 */
 void push(Node **list, int val) {
-    // FILL THIS IN!
     Node *head = *list;
     Node *new = make_node(val, head);
     *list = new;
@@ -111,31 +110,16 @@ int remove_by_value(Node **list, int val) {
 * list: pointer to pointer to Node
 */
 void reverse(Node **list) {
-    // FILL THIS IN!
-    Node *curr = *list;
     Node *prev = NULL;
-    Node *next = curr->next;
-    while (next != NULL) {
+    Node *curr = *list;
+    Node *next = NULL;
+    while (curr != NULL) {
       next = curr->next;
       curr->next = prev;
       prev = curr;
       curr = next;
-    } // this one just prints out the head
-
-    Node *prev = *list;
-    Node *curr = prev->next;
-    Node *next = curr->next;
-    while (next != NULL) {
-      curr->next = prev;
-      prev = curr;
-      curr = next;
-      next = curr->next;
     }
-    curr->next = prev;
-    *list = curr;
-    // this one keeps printing out numbers
-
-
+    *list = prev;
 }
 
 
