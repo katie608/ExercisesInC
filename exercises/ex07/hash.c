@@ -178,8 +178,14 @@ int hash_hashable(Hashable *hashable)
 */
 int equal_int (void *ip, void *jp)
 {
-    // FILL THIS IN!
-    return 0;
+    // FILLED THIS IN!
+    int *i = (int*)ip;
+    int *j = (int*)ip;
+    if (*i == *j) {
+      return 1;
+    } else {
+      return 0;
+    }
 }
 
 
@@ -192,8 +198,14 @@ int equal_int (void *ip, void *jp)
 */
 int equal_string (void *s1, void *s2)
 {
-    // FILL THIS IN!
-    return 0;
+    // FILLED THIS IN!
+    char *one = (char*)s1;
+    char *two = (char*)s2;
+    if (*one == *two) {
+      return 1;
+    } else {
+      return 0;
+    }
 }
 
 
@@ -207,8 +219,13 @@ int equal_string (void *s1, void *s2)
 */
 int equal_hashable(Hashable *h1, Hashable *h2)
 {
-    // FILL THIS IN!
-    return 0;
+    // FILLED THIS IN!
+    // use previous equal functions
+    if (h1->equal == h2->equal) {
+      return h1->equal(h1->key, h2->key);
+    } else {
+      return 0;
+    }
 }
 
 
@@ -296,7 +313,17 @@ Node *prepend(Hashable *key, Value *value, Node *rest)
 /* Looks up a key and returns the corresponding value, or NULL */
 Value *list_lookup(Node *list, Hashable *key)
 {
-    // FILL THIS IN!
+    // FILLED THIS IN!
+    // iterate through linked list until match is found
+    Node *current = list;
+    while (current != NULL) { // list contains keys
+      if (equal_hashable(list->key, key)) {
+        // check if key from node list, and hashable key are equal
+        return list->value;
+      }
+      current = current->next; // iterate through linked list
+    }
+    // if no elements in list match the hashable key, return null
     return NULL;
 }
 
@@ -342,6 +369,10 @@ void print_map(Map *map)
 void map_add(Map *map, Hashable *key, Value *value)
 {
     // FILL THIS IN!
+    // need to hash
+    // value that you get back from hash function is not always between 1-9
+    // but there are 9 lists, so shrink/reduce hash value to range 0 - map->n-1
+    // using (abs(hash_value) % map->n)
 }
 
 
