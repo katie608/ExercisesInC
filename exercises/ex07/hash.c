@@ -364,23 +364,31 @@ void print_map(Map *map)
     }
 }
 
-
 /* Adds a key-value pair to a map. */
 void map_add(Map *map, Hashable *key, Value *value)
 {
-    // FILL THIS IN!
+    // FILLED THIS IN!
     // need to hash
     // value that you get back from hash function is not always between 1-9
     // but there are 9 lists, so shrink/reduce hash value to range 0 - map->n-1
     // using (abs(hash_value) % map->n)
+    int i = abs(hash_hashable(key)) % map->n;
+    if (map->lists[i]) {
+      map->lists[i] = make_node(key, value, map->lists[i]);
+    } else {
+      map->lists[i] = make_node(key, value, NULL);
+    }
+
 }
 
 
 /* Looks up a key and returns the corresponding value, or NULL. */
 Value *map_lookup(Map *map, Hashable *key)
 {
-    // FILL THIS IN!
-    return NULL;
+    // FILLED THIS IN!
+    int i = abs(hash_hashable(key)) % map->n;
+    // list_lookup will return null if it does not find
+    return list_lookup(map->lists[i], key);
 }
 
 
