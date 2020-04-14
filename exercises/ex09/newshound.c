@@ -43,10 +43,34 @@ int main(int argc, char *argv[])
         sprintf(var, "RSS_FEED=%s", feeds[i]);
         char *vars[] = {var, NULL};
 
-        int res = execle(PYTHON, PYTHON, SCRIPT, search_phrase, NULL, vars);
-        if (res == -1) {
-            error("Can't run script.");
+        pid_t pid;
+        pid = fork();
+
+        /* check for an error */
+        if (pid == -1) {
+            fprintf(stderr, "fork failed: %s\n", strerror(errno));
+            perror(argv[0]);
+            exit(1);
         }
+
+
+        if (pid != 0) {
+          int res = execle(PYTHON, PYTHON, SCRIPT, search_phrase, NULL, vars);
+          if (res == -1) {
+              error("Can't run script.");
+          }
+        }
+        exit(1);
+
+
+        /*
+        It was only loading the first few sites before because execle was
+        making a system call and then exiting. To solve the problem, you need
+        to create child processes to run execle
+        */
+
+
+
     }
     return 0;
 }
