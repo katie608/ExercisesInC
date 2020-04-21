@@ -24,7 +24,11 @@ void parent_code(int pipe_to_child[])
 
     // write a string to the child
     char line[] = "I'm proud of you, child.";
+<<<<<<< HEAD
     ssize_t size = write(pipe_to_child[1], line, strlen(line)+1); // use write system call to send from parent to child
+=======
+    ssize_t size = write(pipe_to_child[1], line, strlen(line)+1);
+>>>>>>> 164148ba1b0707c6d7e2dbea6c0f09eeb7d9c862
     if (size == -1)
         error("Parent can't write to child");
     printf("Parent wrote %ld bytes\n", size);
@@ -40,7 +44,11 @@ void child_code(int pipe_to_child[])
     char buffer[count];
 
     // read from pipe_to_child
+<<<<<<< HEAD
     ssize_t size = read(pipe_to_child[0], buffer, count); // use read system call
+=======
+    ssize_t size = read(pipe_to_child[0], buffer, count);
+>>>>>>> 164148ba1b0707c6d7e2dbea6c0f09eeb7d9c862
     if (size == -1)
         error("Child can't read from parent");
     printf("Child read %ld bytes.\n", size);
