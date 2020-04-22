@@ -19,6 +19,7 @@ Based on an example in Head First C.
 #include <signal.h>
 
 int score = 0;
+int flag = 0;
 
 /* Set up a signal handler.
 
@@ -45,8 +46,10 @@ void end_game(int sig)
 */
 void times_up(int sig) {
     puts("\nTIME'S UP!");
-    raise(SIGINT);
+    flag = 1;
 }
+
+
 
 int main(void) {
     int a, b, answer;
@@ -61,6 +64,8 @@ int main(void) {
     // seed the random number generator
     srandom((unsigned int) time(NULL));
 
+
+
     while(1) {
         // pose the question
         a = rand() % 11;
@@ -73,7 +78,9 @@ int main(void) {
         // get the answer
         while (1) {
             char *ret = fgets(txt, 4, stdin);
-            if (ret) break;
+            if (ret){
+              break;
+            }
         }
         answer = atoi(txt);
 
@@ -85,6 +92,10 @@ int main(void) {
             printf("\nWrong!\n");
         }
         printf("Score: %i\n", score);
+
+        if (flag == 1) {
+          raise(SIGINT);
+        }
     }
     return 0;
 }

@@ -50,7 +50,7 @@ void child_code(int pipe_to_child[], int pipe_to_parent[])
     // close the write end of pipe to child
     close(pipe_to_child[1]);
 
-    int count = 128;
+    int count = 128; 
     char buffer[count];
 
     // read from pipe_to_child
@@ -81,7 +81,7 @@ void child_code(int pipe_to_child[], int pipe_to_parent[])
 int main(int argc, char *argv[])
 {
     /*Create a pipe */
-    int pipe_to_child[2];
+    int pipe_to_child[2]; //ask about why this is [2]
     if (pipe(pipe_to_child) == -1)
         error("Can't create the first pipe");
 
