@@ -5,11 +5,22 @@ License: GNU GPLv3
 
 */
 
+/*
+2.
+Yes, the final value of the counter is correct.
+
+3.
+Yes, I see evidence  that the threads are running concurrently, since the
+counter not updated exactly once each iteration
+There don't seem to be any synchronization errors, since the value of the final
+counter always seems to be correct, even when I have run it several times
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 
-#define NUM_CHILDREN 5
+#define NUM_CHILDREN 3
 
 /* Print an error message and exit.
 */
