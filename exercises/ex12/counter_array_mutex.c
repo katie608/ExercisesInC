@@ -6,10 +6,10 @@ License: GNU GPLv3
 */
 
 /*
-2.
-The program counts to 999999 each time, but it also prints that there are
-erros each time, which means that there are synchronization errors despite
-the program performing well. 
+Add code that uses a mutex to eliminate the synchronization errors
+Then time them:
+time ./counter_array
+time ./counter_array_mutex
 */
 
 #include <stdio.h>
