@@ -15,8 +15,10 @@ time ./counter_array_mutex
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include "mutex.h"
 
 #define NUM_CHILDREN 2
+
 
 void perror_exit(char *s)
 {
@@ -37,6 +39,7 @@ typedef struct {
     int counter;
     int end;
     int *array;
+    Mutex *lock;
 } Shared;
 
 Shared *make_shared(int end)
@@ -46,6 +49,7 @@ Shared *make_shared(int end)
 
     shared->counter = 0;
     shared->end = end;
+    shared->lock = make_mutex();
 
     shared->array = check_malloc(shared->end * sizeof(int));
     for (i=0; i<shared->end; i++) {
@@ -83,6 +87,8 @@ void child_code(Shared *shared)
         if (shared->counter >= shared->end) {
             return;
         }
+
+        mutex_lock(shared->lock);
         // get the next task
         int task_number = shared->counter;
         shared->array[task_number]++;
@@ -91,6 +97,7 @@ void child_code(Shared *shared)
         if (shared->counter % 10000 == 0) {
             printf("%d\n", task_number);
         }
+        mutex_unlock(shared->lock);
     }
 }
 
@@ -120,6 +127,8 @@ int main()
     pthread_t child[NUM_CHILDREN];
 
     Shared *shared = make_shared(1000000);
+
+    // Mutex lock =
 
     for (i=0; i<NUM_CHILDREN; i++) {
         child[i] = make_thread(entry, shared);
